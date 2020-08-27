@@ -1,0 +1,5 @@
+Based on:
+https://www.eriksmistad.no/3d-gradient-vector-flow-matlab-implementation/
+
+Github Repo:
+https://github.com/smistad/3D-Gradient-Vector-Flow-for-Matlab
