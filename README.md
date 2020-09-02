@@ -14,6 +14,32 @@
  
  The paper will be added to this repository as a file or a link at a future 
  date.
+ 
+## Installation
+
+The package was tested from a base [Anaconda](https://www.anaconda.com/) installation using python 3.7, but should work on any python 3 installation.
+Using the included setup script, the package can be installed with pip from the base folder:
+
+```
+pip install .
+```
+ 
+## How the package is organized
+
+This is mainly for those reviewing the code.
+
+The package is organized in three subsections:
+- geometry: containing  all extensions to the [NURBS-Python](https://github.com/orbingol/NURBS-Python/tree/master/geomdl) library and preset geometries.
+- utils: containing data manipulation classes, plotting functions, Gradient Vector Flow algorithms
+- optimize: the main point of interest, with a "solvers" module containing parent classes, and each method (2D, 3D, force model, hybrid model) each in their own module.
+
+Examples for each strategy can be found in the examples folder, including gradient vector flow, accompanied by their testfiles.
+These are meant to be run from the examples folder after installation (including using it as the working directory, which is default behavior).
+
+```
+cd examples
+python [SCRIPT_NAME].py
+```
 
 ## Hybrid Snakes
 
