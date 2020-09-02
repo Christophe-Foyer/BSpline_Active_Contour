@@ -85,6 +85,7 @@ class HybridSnakes():
              and 3 in args[0].shape and len(args[0].shape)==2), \
                 "Inputs should be x, y, z or single 2D xyz ndarray"
             
+        # convert arguments to x,y,z
         if len(args) == 3:
             x, y, z = args
         elif len(args) == 1:

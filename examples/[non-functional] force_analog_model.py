@@ -42,19 +42,11 @@ solver.plot(plot_forces=True, scale_vectors=True,
             scale_factor=1, forces='elastic',
             plot_image=False)
 
-# solver.plot(plot_forces=True, scale_vectors=True,
-#             scale_factor=1, forces='all',
-#             plot_image=False)
-
 solver.plot(plot_forces=True, scale_vectors=True,
             scale_factor=1, forces='ctrlpts',
             plot_image=False)
 
 # %% Optimize
-# solver.plot(plot_initial=True,
-#             plane_widget=True,
-#             plot_forces=True, scale_factor=10,)
-
 solver.optimize(num_iter=int(1E2), step_size=0.01, verbose=True)
 
 solver.plot(plot_initial=True,

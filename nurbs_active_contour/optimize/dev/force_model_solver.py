@@ -145,6 +145,10 @@ class ForceModelSolver():
         return evalpts
     
     def _gen_ctrlpts_map(self):
+        """
+        Generates a map to assign forces calculated at evaluated points to
+        its corresponding controlpoint.
+        """
         
         # Determine how to split the data
         splits = [None, None]
@@ -155,9 +159,6 @@ class ForceModelSolver():
         if surf.closed_u:
             splits[0] = surf.knotvector_u[degree_u+1:-degree_u]
         else:
-            # This is not perfect but will do (last value >1)
-            # splits[0] = ((np.indices((surf.data['size'][0]-degree_u+1,))+0.5) \
-            #     /(surf.data['size'][0])).flatten()
             n = surf.control_points_np.shape[0]
             delta = 1/(n+(n-2))
             cuts = [delta]
@@ -170,9 +171,6 @@ class ForceModelSolver():
         if surf.closed_v:
             splits[1] = surf.knotvector_v[degree_v+1:-degree_v]
         else:
-            # This is not perfect but will do (last value >1)
-            # splits[1] = ((np.indices((surf.data['size'][1]-degree_v+1,))+0.5) \
-            #     /(surf.data['size'][1])).flatten()
             n = surf.control_points_np.shape[1]
             delta = 1/(n+(n-2))
             cuts = [delta]
@@ -198,8 +196,6 @@ class ForceModelSolver():
         
         self._cuts_u = cuts_u
         self._cuts_v = cuts_v
-        # print(indices.shape)
-        # print(cuts_u, cuts_v)
         
         for i in range(1, len(cuts_u)):
             for j in range(1, len(cuts_v)):
@@ -207,10 +203,6 @@ class ForceModelSolver():
                 maxcut_u = cuts_u[i]
                 mincut_v = cuts_v[j-1]
                 maxcut_v = cuts_v[j]
-            
-                # print(mincut_u, maxcut_u, mincut_v, maxcut_v)
-                
-                # print(i, j)
             
                 assignments[i-1, j-1] = \
                     (indices[0, mincut_u:maxcut_u, mincut_v:maxcut_v], 
@@ -222,6 +214,9 @@ class ForceModelSolver():
         return assignments
     
     def _assign_to_ctrlpts(self, forces):
+        """
+        Assigns forces to controlpoints
+        """
         
         ctrlpts_forces = np.zeros((forces.shape[0],
                                    *self.surface.control_points_np.shape[:2]))
@@ -235,6 +230,9 @@ class ForceModelSolver():
         return ctrlpts_forces
     
     def _apply_locks(self, ctrlpts_forces):
+        """
+        Lock certain controlpoint dimensions (the ends here)
+        """
         
         # Apply end locks
         for i in range(3):
@@ -554,19 +552,11 @@ if __name__ == "__main__":
                 scale_factor=1, forces='elastic',
                 plot_image=False)
     
-    # solver.plot(plot_forces=True, scale_vectors=True,
-    #             scale_factor=1, forces='all',
-    #             plot_image=False)
-    
     solver.plot(plot_forces=True, scale_vectors=True,
                 scale_factor=1, forces='ctrlpts',
                 plot_image=False)
     
     # %% Optimize
-    # solver.plot(plot_initial=True,
-    #             plane_widget=True,
-    #             plot_forces=True, scale_factor=10,)
-    
     solver.optimize(num_iter=int(1E2), step_size=0.01, verbose=True)
     
     solver.plot(plot_initial=True,
