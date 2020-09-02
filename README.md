@@ -6,7 +6,7 @@
  This project was built as part of my masters thesis at University
  College London.
  
- The code is free to be used, modified, and distributed as per the MIt license.
+ The code is free to be used, modified, and distributed as per the MIT license.
  
  This is far from a finished product, and some of the classes included have
  shown very limited results. This repository is here so other can review and
@@ -38,8 +38,28 @@ These are meant to be run from the examples folder after installation (including
 
 ```
 cd examples
-python [SCRIPT_NAME].py
+python "[SCRIPT_NAME].py"
 ```
+
+The scripts are split as follows:
+
+2D Solver:
+- solver2d.py
+- "performance - traditional vs bspline.py"
+
+Hybrid Solver:
+- "aortic_cross-section - hybrid_snake.py"
+- "generated_tube - hybrid_snake.py"
+
+3D solver (limited usefulness, run as a second pass after the hybrid solver):
+- "aortic_cross-section - hs & 3d.py"
+- "generated_tube - hs & 3d.py"
+
+Force Analog Solver (non-functional):
+- "[non-functional] force_analog_model.py"
+
+Gradient Vector Flow:
+- GVF.py
 
 ## Hybrid Snakes
 
